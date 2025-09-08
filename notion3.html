@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MCU Inspiring Quotes — Rotating Every 30 Seconds</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+      max-width: 900px;
+    }
+    .quote {
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 1.6;
+    }
+    .author {
+      margin-top: 16px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="quote" id="quoteText">Loading…</div>
+    <div class="author" id="quoteAuthor"></div>
+  </div>
+
+  <script>
+    const INTERVAL = 30000; // 30 seconds
+
+    const quotes = [
+      { t: "Sometimes you gotta run before you can walk.", a: "Tony Stark" },
+      { t: "If we can’t protect the Earth, you can be damn sure we’ll avenge it.", a: "Tony Stark" },
+      { t: "It’s not about how much we lost, it’s about how much we have left.", a: "Tony Stark" },
+      { t: "I shouldn’t be alive… unless it was for a reason.", a: "Tony Stark" },
+      { t: "You can take away my house, all my tricks and toys, but one thing you can’t take away… I am Iron Man.", a: "Tony Stark" },
+      { t: "We create our own demons.", a: "Tony Stark" },
+      { t: "Part of the journey is the end.", a: "Tony Stark" },
+      { t: "I love you 3000.", a: "Tony Stark" },
+      { t: "Following’s not really my style.", a: "Tony Stark" },
+      { t: "I just finally know what I have to do. And I know in my heart that it’s right.", a: "Tony Stark" },
+      { t: "Is it better to be feared or respected? I say, is it too much to ask for both?", a: "Tony Stark" },
+      { t: "They say that the best weapon is one you never have to fire. I respectfully disagree. I prefer the weapon you only have to fire once.", a: "Tony Stark" },
+      { t: "The truth is… I am Iron Man.", a: "Tony Stark" },
+      { t: "If you’re nothing without the suit, then you shouldn’t have it.", a: "Tony Stark" },
+
+      { t: "I can do this all day.", a: "Steve Rogers" },
+      { t: "I don’t like bullies; I don’t care where they’re from.", a: "Steve Rogers" },
+      { t: "The price of freedom is high. It always has been. And it’s a price I’m willing to pay.", a: "Steve Rogers" },
+      { t: "Avengers… assemble.", a: "Steve Rogers" },
+      { t: "I choose to run toward my problems, and not away from them. Because that’s what heroes do.", a: "Thor" },
+      { t: "That’s my secret, Cap. I’m always angry.", a: "Bruce Banner" },
+      { t: "Even if there’s a small chance, we owe this to everyone who’s not in this room to try.", a: "Natasha Romanoff" },
+      { t: "I’ve got red in my ledger. I’d like to wipe it out.", a: "Natasha Romanoff" }
+    ];
+
+    let i = 0;
+    const $text = document.getElementById('quoteText');
+    const $author = document.getElementById('quoteAuthor');
+
+    function render(index) {
+      const q = quotes[index];
+      if (q) {
+        $text.textContent = q.t;
+        $author.textContent = `— ${q.a}`;
+      }
+    }
+
+    function next() {
+      i = (i + 1) % quotes.length;
+      render(i);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      render(i);
+      setInterval(next, INTERVAL);
+    });
+  </script>
+</body>
+</html>
