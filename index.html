@@ -26,12 +26,22 @@
       font-size: 28px;
       font-weight: bold;
       line-height: 1.6;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+    .quote.show {
+      opacity: 1;
     }
     .author {
       margin-top: 16px;
       font-size: 20px;
       font-weight: bold;
       color: #fff;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+    .author.show {
+      opacity: 1;
     }
   </style>
 </head>
@@ -46,10 +56,9 @@
 
     const quotes = [
       { t: "Sometimes you gotta run before you can walk.", a: "Tony Stark" },
-      { t: "If we can’t protect the Earth, you can be damn sure we’ll avenge it.", a: "Tony Stark" },
+      { t: "If we can't protect the Earth, you can be damned sure we'll avenge it!", a: "Tony Stark" },
       { t: "It’s not about how much we lost, it’s about how much we have left.", a: "Tony Stark" },
       { t: "I shouldn’t be alive… unless it was for a reason.", a: "Tony Stark" },
-      { t: "You can take away my house, all my tricks and toys, but one thing you can’t take away… I am Iron Man.", a: "Tony Stark" },
       { t: "We create our own demons.", a: "Tony Stark" },
       { t: "Part of the journey is the end.", a: "Tony Stark" },
       { t: "I love you 3000.", a: "Tony Stark" },
@@ -59,36 +68,96 @@
       { t: "They say that the best weapon is one you never have to fire. I respectfully disagree. I prefer the weapon you only have to fire once.", a: "Tony Stark" },
       { t: "The truth is… I am Iron Man.", a: "Tony Stark" },
       { t: "If you’re nothing without the suit, then you shouldn’t have it.", a: "Tony Stark" },
-
       { t: "I can do this all day.", a: "Steve Rogers" },
       { t: "I don’t like bullies; I don’t care where they’re from.", a: "Steve Rogers" },
       { t: "The price of freedom is high. It always has been. And it’s a price I’m willing to pay.", a: "Steve Rogers" },
       { t: "Avengers… assemble.", a: "Steve Rogers" },
-      { t: "I choose to run toward my problems, and not away from them. Because that’s what heroes do.", a: "Thor" },
       { t: "That’s my secret, Cap. I’m always angry.", a: "Bruce Banner" },
       { t: "Even if there’s a small chance, we owe this to everyone who’s not in this room to try.", a: "Natasha Romanoff" },
-      { t: "I’ve got red in my ledger. I’d like to wipe it out.", a: "Natasha Romanoff" }
+      { t: "I’ve got red in my ledger. I’d like to wipe it out.", a: "Natasha Romanoff" },
+      { t: "The truth is, I'm exactly where I'm supposed to be.", a: "Natasha Romanoff" },
+      { t: "You don't need to be a superhero to get the girl. The right girl will bring out the hero in you.", a: "Deadpool" },
+      { t: "Kneel.", a: "Loki" },
+      { t: "Hurt 'em back. You get killed... walk it off.", a: "Steve Rogers" },
+      { t: "I'm only alive because fate wants me alive.", a: "Thor" },
+      { t: "With great power comes great irresponsibility.", a: "Deadpool" },
+      { t: "I will protect Asgard and all the realms with my last and every breath.", a: "Thor" },
+      { t: "Whatever it takes.", a: "Steve Rogers" },
+      { t: "The hardest choices require the strongest wills.", a: "Tony Stark" },
+      { t: "The first and most oppressive lie ever uttered was the song of freedom.", a: "Loki" },
+      { t: "Trust is for children and dogs.", a: "Loki" },
+      { t: "You were made to be ruled. In the end, you will always kneel.", a: "Loki" },
+      { t: "I went for the head.", a: "Thor" },
+      { t: "My choices are my own.", a: "Loki" },
+      { t: "I didn't do it for him.", a: "Loki" },
+      { t: "We're the Avengers. We gotta finish this.", a: "Tony Stark" },
+      { t: "I told you, I don't want to join your super-secret boy band.", a: "Tony Stark" },
+      { t: "You should know that when you betray me, I will kill you.", a: "Thor" },
+      { t: "I have no plans to die today.", a: "Thor" },
+      { t: "Bring me Thanos!", a: "Thor" },
+      { t: "Everybody wants a happy ending. Right? But it doesn't always roll that way.", a: "Tony Stark" },
+      { t: "You're big. I've fought bigger.", a: "Thor" },
+      { t: "Let's kill him properly this time.", a: "Thor" },
+      { t: "We are not a team. We are just... we are just... a bunch of people who happen to be together.", a: "Thor" },
+      { t: "A desperate play for control.", a: "Loki" },
+      { t: "The worst part about cancer isn't what it does to you, but what it does to the people you love.", a: "Deadpool" },
+      { t: "I assure you, brother, the sun will shine on us again.", a: "Loki" },
+      { t: "Some people move on, but not us. Not us.", a: "Steve Rogers" },
+      { t: "An impressive cage... not built I think... for me.", a: "Loki" },
+      { t: "I recognize the council has made a decision, but given that it's a stupid-ass decision, I've elected to ignore it.", a: "Nick Fury" },
+      { t: "Maximum effort!", a: "Deadpool" },
+      { t: "Life is an endless series of train wrecks with only brief, commercial-like breaks of happiness.", a: "Deadpool" },
+      { t: "I may be super, but I'm no hero.", a: "Deadpool" },
+      { t: "The truth is, I'm just a bad guy who gets paid to f*ck up worse guys.", a: "Deadpool" },
+      // NEW DOCTOR STRANGE & ANCIENT ONE QUOTES
+      { t: "The greatest teachers, they tell you where to look, but not what to see.", a: "The Ancient One" },
+      { t: "We never lose our demons, Mordo. We only learn to live above them.", a: "The Ancient One" },
+      { t: "Arrogance and fear still keep you from learning the simplest and most significant lesson of all: it’s not about you.", a: "The Ancient One" },
+      { t: "You are a man looking at the world through a keyhole. You have spent your whole life trying to widen that keyhole, to see more, to know more. And now, on hearing that it can be widened, in ways you can't imagine, you reject the possibility.", a: "The Ancient One" },
+      { t: "You cannot beat a river into submission. You have to surrender to its current and use its power as your own.", a: "The Ancient One" },
+      { t: "We don't get to choose our time. Death is what gives life meaning. To know your days are numbered.", a: "The Ancient One" },
+      { t: "I became a doctor to save lives, not take them.", a: "Doctor Strange" },
+      { t: "Dormammu, I've come to bargain.", a: "Doctor Strange" },
+      { t: "Pain's an old friend.", a: "Doctor Strange" },
+      { t: "I went forward in time... to view alternate futures. To see all the possible outcomes of the coming conflict.", a: "Doctor Strange" },
+      { t: "In the grand calculus of the multiverse, their sacrifice means infinitely more than their lives.", a: "Doctor Strange" },
+      { t: "We are made of matter and nothing more. You're just another tiny, momentary speck within an indifferent universe.", a: "Doctor Strange" },
+      { t: "The multiverse is a concept of which we know frighteningly little.", a: "Doctor Strange" },
+      { t: "You always have a choice.", a: "America Chavez" },
+      { t: "You were right to fear me.", a: "Doctor Strange" },
+      { t: "I love you in every universe.", a: "Doctor Strange" },
+      { t: "The best thing about you...is your kindness.", a: "Doctor Strange" }
     ];
 
-    let i = 0;
     const $text = document.getElementById('quoteText');
     const $author = document.getElementById('quoteAuthor');
 
-    function render(index) {
-      const q = quotes[index];
-      if (q) {
+    let lastIndex = -1;
+
+    function getRandomIndex() {
+      let newIndex;
+      do {
+        newIndex = Math.floor(Math.random() * quotes.length);
+      } while (newIndex === lastIndex);
+      lastIndex = newIndex;
+      return newIndex;
+    }
+
+    function render() {
+      const q = quotes[getRandomIndex()];
+      $text.classList.remove("show");
+      $author.classList.remove("show");
+
+      setTimeout(() => {
         $text.textContent = q.t;
-        $author.textContent = `— ${q.a}`;
-      }
+        $author.textContent = q.a;
+        $text.classList.add("show");
+        $author.classList.add("show");
+      }, 500);
     }
 
-    function next() {
-      i = (i + 1) % quotes.length;
-      render(i);
-    }
-
-    render(i);
-    setInterval(next, INTERVAL);
+    render();
+    setInterval(render, INTERVAL);
   </script>
 </body>
 </html>
