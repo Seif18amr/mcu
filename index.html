@@ -1,5 +1,5 @@
 <script>
-  const INTERVAL = 20000; // 20 seconds
+  const INTERVAL = 30000; // 30 seconds
 
   const quotes = [
     { t: "Sometimes you gotta run before you can walk.", a: "Tony Stark" },
@@ -78,41 +78,36 @@
   const $text = document.getElementById('quoteText');
   const $author = document.getElementById('quoteAuthor');
 
-  let playlist = [];
+  let lastIndex = -1;
   let lastAuthor = "";
 
-  function shuffleQuotes() {
-    const arr = [...quotes];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    playlist = arr;
-  }
-
-  function nextQuote() {
-    if (playlist.length === 0) shuffleQuotes();
-
-    let q;
-    let safety = 0;
+  function getRandomIndex() {
+    let newIndex, safety = 0;
     do {
-      q = playlist.shift();
-      playlist.push(q); // rotate back
+      newIndex = Math.floor(Math.random() * quotes.length);
       safety++;
+      // if too many retries, break to avoid infinite loop in case of small pool
       if (safety > 20) break;
-    } while (q.a === lastAuthor);
+    } while (newIndex === lastIndex || quotes[newIndex].a === lastAuthor);
 
-    lastAuthor = q.a;
-    return q;
+    lastIndex = newIndex;
+    lastAuthor = quotes[newIndex].a;
+    return newIndex;
   }
 
   function render() {
-    const q = nextQuote();
-    $text.textContent = q.t;
-    $author.textContent = q.a;
+    const q = quotes[getRandomIndex()];
+    $text.classList.remove("show");
+    $author.classList.remove("show");
+
+    setTimeout(() => {
+      $text.textContent = q.t;
+      $author.textContent = q.a;
+      $text.classList.add("show");
+      $author.classList.add("show");
+    }, 500);
   }
 
-  shuffleQuotes();
   render();
   setInterval(render, INTERVAL);
 </script>
