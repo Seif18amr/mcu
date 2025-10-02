@@ -17,6 +17,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      overflow: hidden;
     }
     .container {
       padding: 20px;
@@ -54,7 +55,6 @@
   <script>
     const INTERVAL = 10000; // 10 seconds
     const quotes = [
-      // --- ORIGINAL TONY STARK QUOTES ---
       { t: "Sometimes you gotta run before you can walk.", a: "Tony Stark" },
       { t: "It’s not about how much we lost, it’s about how much we have left.", a: "Tony Stark" },
       { t: "I shouldn’t be alive… unless it was for a reason.", a: "Tony Stark" },
@@ -67,4 +67,110 @@
       { t: "The truth is… I am Iron Man.", a: "Tony Stark" },
       { t: "If you’re nothing without the suit, then you shouldn’t have it.", a: "Tony Stark" },
       { t: "Everybody wants a happy ending. Right? But it doesn't always roll that way.", a: "Tony Stark" },
-      { t: "No amount of money ever bought a second of time.", a: "Tony Stark
+      { t: "No amount of money ever bought a second of time.", a: "Tony Stark" },
+      { t: "I can do this all day.", a: "Steve Rogers" },
+      { t: "The price of freedom is high. It always has been. And it’s a price I’m willing to pay.", a: "Steve Rogers" },
+      { t: "Avengers… assemble.", a: "Steve Rogers" },
+      { t: "Whatever it takes.", a: "Steve Rogers" },
+      { t: "Some people move on, but not us. Not us.", a: "Steve Rogers" },
+      { t: "I'm only alive because fate wants me alive.", a: "Thor" },
+      { t: "I would rather be a good man than a great king.", a: "Thor" },
+      { t: "Everyone fails at who they're supposed to be. The measure of a person, of a hero, is how well they succeed at being who they are.", a: "Frigga" },
+      { t: "That hammer was to help you control your power, to focus it. It was never your source of strength.", a: "Odin" },
+      { t: "The first and most oppressive lie ever uttered was the song of freedom.", a: "Loki" },
+      { t: "Trust is for children and dogs.", a: "Loki" },
+      { t: "My choices are my own.", a: "Loki" },
+      { t: "I assure you, brother, the sun will shine on us again.", a: "Loki" },
+      { t: "Pain's an old friend.", a: "Doctor Strange" },
+      { t: "In the grand calculus of the multiverse, their sacrifice means infinitely more than their lives.", a: "Doctor Strange" },
+      { t: "I love you in every universe.", a: "Doctor Strange" },
+      { t: "The greatest teachers, they tell you where to look, but not what to see.", a: "The Ancient One" },
+      { t: "We never lose our demons, Mordo. We only learn to live above them.", a: "The Ancient One" },
+      { t: "Arrogance and fear still keep you from learning the simplest and most significant lesson of all: it’s not about you.", a: "The Ancient One" },
+      { t: "You are a man looking at the world through a keyhole. You have spent your whole life trying to widen that keyhole... you reject the possibility.", a: "The Ancient One" },
+      { t: "You cannot beat a river into submission. You have to surrender to its current and use its power as your own.", a: "The Ancient One" },
+      { t: "We don't get to choose our time. Death is what gives life meaning. To know your days are numbered.", a: "The Ancient One" },
+      { t: "They say this is a tragedy. A man comes back from the war and the war follows him home.", a: "Frank Castle" },
+      { t: "The ones that I've killed... I think about them all. Every single one.", a: "Frank Castle" },
+      { t: "One batch, two batch. Penny and dime.", a: "Frank Castle" },
+      { t: "You don't need to be a superhero to get the girl. The right girl will bring out the hero in you.", a: "Deadpool" },
+      { t: "With great power comes great irresponsibility.", a: "Deadpool" },
+      { t: "The worst part about cancer isn't what it does to you, but what it does to the people you love.", a: "Deadpool" },
+      { t: "Life is an endless series of train wrecks with only brief, commercial-like breaks of happiness.", a: "Deadpool" },
+      { t: "I may be super, but I'm no hero.", a: "Deadpool" },
+      { t: "The truth is, I'm just a bad guy who gets paid to f*ck up worse guys.", a: "Deadpool" },
+      { t: "That’s my secret, Cap. I’m always angry.", a: "Bruce Banner" },
+      { t: "Even if there’s a small chance, we owe this to everyone who’s not in this room to try.", a: "Natasha Romanoff" },
+      { t: "The truth is, I'm exactly where I'm supposed to be.", a: "Natasha Romanoff" },
+      { t: "You always have a choice.", a: "America Chavez" },
+      { t: "What is grief, if not love persevering?", a: "Vision" },
+      { t: "A thing isn't beautiful because it lasts.", a: "Vision" },
+      { t: "The hardest choices require the strongest wills.", a: "Thanos" },
+      { t: "In times of crisis, the wise build bridges, while the foolish build barriers.", a: "T'Challa" },
+      { t: "Just because something works doesn't mean it can't be improved.", a: "Shuri" },
+      { t: "Bury me in the ocean with my ancestors who jumped from ships, 'cause they knew death was better than bondage.", a: "Erik Killmonger" },
+      { t: "He may have been your father, boy, but he wasn't your daddy.", a: "Yondu Udonta" },
+      { t: "With great power, there must also come great responsibility.", a: "Aunt May" },
+      { t: "The world has changed. None of us can go back. All we can do is our best, and sometimes the best that we can do is to start over.", a: "Peggy Carter" },
+      { t: "I can't control their fear, only my own.", a: "Wanda Maximoff" },
+      { t: "You know the difference between justice and punishment?", a: "Frank Castle" },
+      { t: "You cross over to my side of the line, you don’t get to come back from that. Not ever.", a: "Frank Castle" },
+      { t: "You’re not broken. You’re hurt.", a: "Karen Page" },
+      { t: "You can’t fix what’s broken. You can only patch it up and hope it holds.", a: "Micro" },
+      { t: "Dormammu, I’ve come to bargain.", a: "Doctor Strange" },
+      { t: "Genius, billionaire, playboy, philanthropist.", a: "Tony Stark" },
+      { t: "My greatest creation… is you.", a: "Howard Stark" },
+      { t: "I am burdened with glorious purpose.", a: "Loki" },
+      { t: "No one bad is ever truly bad, and no one good is ever truly good.", a: "Loki" },
+      { t: "I don’t enjoy hurting people. I do it because I have to — because I’ve had to.", a: "Loki" },
+      { t: "For you. For all of us… I will hold the universe together.", a: "Loki" },
+      { t: "I know what it’s like to lose. To feel so desperately that you’re right, yet to fail nonetheless.", a: "Thanos" },
+      { t: "I can’t feel you.", a: "Wanda Maximoff" },
+      { t: "I used to think of myself one way. But after this… I am something else.", a: "Wanda Maximoff" }
+    ];
+
+    const $text = document.getElementById('quoteText');
+    const $author = document.getElementById('quoteAuthor');
+
+    let availableQuotes = [];
+
+    function shuffleArray(array) {
+      let currentIndex = array.length, randomIndex;
+      while (currentIndex > 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        // The following line had a bug before. This is the corrected version.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+      return array;
+    }
+
+    function getNextQuote() {
+      if (availableQuotes.length === 0) {
+        availableQuotes = shuffleArray([...quotes]);
+      }
+      const quoteIndex = Math.floor(Math.random() * availableQuotes.length);
+      const quote = availableQuotes.splice(quoteIndex, 1)[0];
+      return quote;
+    }
+
+    function render() {
+      const q = getNextQuote();
+      if (q) {
+        $text.classList.remove("show");
+        $author.classList.remove("show");
+        setTimeout(() => {
+          $text.textContent = q.t;
+          $author.textContent = q.a;
+          $text.classList.add("show");
+          $author.classList.add("show");
+        }, 500);
+      }
+    }
+
+    render();
+    setInterval(render, INTERVAL);
+  </script>
+</body>
+</html>
