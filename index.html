@@ -52,9 +52,9 @@
   </div>
 
   <script>
-    const INTERVAL = 15000; // 15 seconds
+    const INTERVAL = 10000; // 10 seconds
     const quotes = [
-      // --- ALL ORIGINAL QUOTES ---
+      // --- ORIGINAL TONY STARK QUOTES ---
       { t: "Sometimes you gotta run before you can walk.", a: "Tony Stark" },
       { t: "It’s not about how much we lost, it’s about how much we have left.", a: "Tony Stark" },
       { t: "I shouldn’t be alive… unless it was for a reason.", a: "Tony Stark" },
@@ -67,87 +67,28 @@
       { t: "The truth is… I am Iron Man.", a: "Tony Stark" },
       { t: "If you’re nothing without the suit, then you shouldn’t have it.", a: "Tony Stark" },
       { t: "Everybody wants a happy ending. Right? But it doesn't always roll that way.", a: "Tony Stark" },
+      { t: "No amount of money ever bought a second of time.", a: "Tony Stark" },
+
+      // --- ORIGINAL STEVE ROGERS QUOTES ---
       { t: "I can do this all day.", a: "Steve Rogers" },
       { t: "The price of freedom is high. It always has been. And it’s a price I’m willing to pay.", a: "Steve Rogers" },
       { t: "Avengers… assemble.", a: "Steve Rogers" },
       { t: "Whatever it takes.", a: "Steve Rogers" },
       { t: "Some people move on, but not us. Not us.", a: "Steve Rogers" },
-      { t: "That’s my secret, Cap. I’m always angry.", a: "Bruce Banner" },
-      { t: "Even if there’s a small chance, we owe this to everyone who’s not in this room to try.", a: "Natasha Romanoff" },
-      { t: "The truth is, I'm exactly where I'm supposed to be.", a: "Natasha Romanoff" },
-      { t: "You don't need to be a superhero to get the girl. The right girl will bring out the hero in you.", a: "Deadpool" },
+
+      // --- ORIGINAL THOR & ASGARDIAN QUOTES ---
       { t: "I'm only alive because fate wants me alive.", a: "Thor" },
-      { t: "With great power comes great irresponsibility.", a: "Deadpool" },
+      { t: "I would rather be a good man than a great king.", a: "Thor" },
+      { t: "Everyone fails at who they're supposed to be. The measure of a person, of a hero, is how well they succeed at being who they are.", a: "Frigga" },
+      { t: "That hammer was to help you control your power, to focus it. It was never your source of strength.", a: "Odin" },
+
+      // --- ORIGINAL LOKI QUOTES ---
       { t: "The first and most oppressive lie ever uttered was the song of freedom.", a: "Loki" },
       { t: "Trust is for children and dogs.", a: "Loki" },
       { t: "My choices are my own.", a: "Loki" },
-      { t: "The worst part about cancer isn't what it does to you, but what it does to the people you love.", a: "Deadpool" },
       { t: "I assure you, brother, the sun will shine on us again.", a: "Loki" },
-      { t: "Life is an endless series of train wrecks with only brief, commercial-like breaks of happiness.", a: "Deadpool" },
-      { t: "I may be super, but I'm no hero.", a: "Deadpool" },
-      { t: "The truth is, I'm just a bad guy who gets paid to f*ck up worse guys.", a: "Deadpool" },
-      { t: "The greatest teachers, they tell you where to look, but not what to see.", a: "The Ancient One" },
-      { t: "We never lose our demons, Mordo. We only learn to live above them.", a: "The Ancient One" },
-      { t: "Arrogance and fear still keep you from learning the simplest and most significant lesson of all: it’s not about you.", a: "The Ancient One" },
-      { t: "You are a man looking at the world through a keyhole. You have spent your whole life trying to widen that keyhole... you reject the possibility.", a: "The Ancient One" },
-      { t: "You cannot beat a river into submission. You have to surrender to its current and use its power as your own.", a: "The Ancient One" },
-      { t: "We don't get to choose our time. Death is what gives life meaning. To know your days are numbered.", a: "The Ancient One" },
+
+      // --- ORIGINAL DOCTOR STRANGE & SORCERERS ---
       { t: "Pain's an old friend.", a: "Doctor Strange" },
       { t: "In the grand calculus of the multiverse, their sacrifice means infinitely more than their lives.", a: "Doctor Strange" },
-      { t: "You always have a choice.", a: "America Chavez" },
-      { t: "I love you in every universe.", a: "Doctor Strange" },
-
-      // --- NEWLY ADDED DEEP QUOTES ---
-      { t: "What is grief, if not love persevering?", a: "Vision" },
-      { t: "A thing isn't beautiful because it lasts.", a: "Vision" },
-      { t: "The hardest choices require the strongest wills.", a: "Thanos" },
-      { t: "Everyone fails at who they're supposed to be. The measure of a person, of a hero, is how well they succeed at being who they are.", a: "Frigga" },
-      { t: "That hammer was to help you control your power, to focus it. It was never your source of strength.", a: "Odin" },
-      { t: "In times of crisis, the wise build bridges, while the foolish build barriers.", a: "T'Challa" },
-      { t: "Bury me in the ocean with my ancestors who jumped from ships, 'cause they knew death was better than bondage.", a: "Erik Killmonger" },
-      { t: "No amount of money ever bought a second of time.", a: "Tony Stark" },
-      { t: "He may have been your father, boy, but he wasn't your daddy.", a: "Yondu Udonta" },
-      { t: "With great power, there must also come great responsibility.", a: "Aunt May" },
-      { t: "The world has changed. None of us can go back. All we can do is our best, and sometimes the best that we can do is to start over.", a: "Peggy Carter" },
-      { t: "I would rather be a good man than a great king.", a: "Thor" },
-      { t: "Just because something works doesn't mean it can't be improved.", a: "Shuri" },
-      { t: "I can't control their fear, only my own.", a: "Wanda Maximoff" },
-
-      // --- PUNISHER QUOTES ---
-      { t: "They say this is a tragedy. A man comes back from the war and the war follows him home.", a: "Frank Castle" },
-      { t: "The ones that I've killed... I think about them all. Every single one.", a: "Frank Castle" },
-      { t: "One batch, two batch. Penny and dime.", a: "Frank Castle" }
-    ];
-
-    const $text = document.getElementById('quoteText');
-    const $author = document.getElementById('quoteAuthor');
-
-    let availableQuotes = [];
-
-    function getNextQuote() {
-      if (availableQuotes.length === 0) {
-        availableQuotes = [...quotes];
-      }
-      const quoteIndex = Math.floor(Math.random() * availableQuotes.length);
-      const quote = availableQuotes.splice(quoteIndex, 1)[0];
-      return quote;
-    }
-
-    function render() {
-      const q = getNextQuote();
-      $text.classList.remove("show");
-      $author.classList.remove("show");
-
-      setTimeout(() => {
-        $text.textContent = q.t;
-        $author.textContent = q.a;
-        $text.classList.add("show");
-        $author.classList.add("show");
-      }, 500);
-    }
-
-    render();
-    setInterval(render, INTERVAL);
-  </script>
-</body>
-</html>
+      { t: "I love you in every universe.", a:
